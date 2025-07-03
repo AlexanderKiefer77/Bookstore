@@ -7,13 +7,13 @@
     <title>Bookstore</title>
     <link rel="icon" href="./img/book-black.png" sizes="any" type="image/svg+xml">
 
-    <script src="./script.js"></script>
+   
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/standart.css">
 
 </head>
 
-<body>
+<body onload="render()">
 
 
     <header>
@@ -26,54 +26,11 @@
         </div>
     </header>
 
+   
+
     <main id="aot" class="aot">
-        <div class="contentWidth"> <!-- only for content width -->
-
-            <div id="book" class="bookfield">
-                <header class="bookHeader"><h3>Buchtitel</h3></header>
-                <div class="pictureField">
-                    <img src="./img/book-pink.png" alt="Illustration from small pichture">
-                </div>
-                <div class="bookDatas">
-                    <div class="priceField">
-                        <p>16.75 €</p>
-                    </div>
-                    <div class="likeField">
-                        <p>1300</p>
-                        <img src="./img/heart_white.svg" alt="Herz">
-                    </div>
-                </div>
-                <div class="dataField">
-                    <table>
-                        <tr>
-                            <td><b>Author</b></td>
-                            <td>:</td>
-                            <td>Sabine Grün</td>
-                        </tr>
-                        <tr>
-                            <td><b>Erscheinungsjahr</b></td>
-                            <td>:</td>
-                            <td>2017</td>
-                        </tr>
-                        <tr>
-                            <td><b>Genre</b></td>
-                            <td>:</td>
-                            <td>Fantasy</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="commentsField">
-                    <div class="comments">
-                    <h4>Kommentare:</h4>
-                    <p>keine Kommentare, schreibe du das erste</p>
-                    </div>
-                    <div class="inputField">
-                    <input type="text" placeholder="Schreibe dein Kommentar ...">
-                    <img src="./img/send_white.svg" alt="send-icon">
-                    </div>
-                </div>
-            </div>
-
+        <div class="contentWidth">  <!-- only for content width -->
+           <div id="content" class="content"></div>
         </div>
     </main>
 
@@ -84,6 +41,7 @@
             </div>
         </div>
     </footer>
+ <script src="./script.js"></script>
 
 </body>
 

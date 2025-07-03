@@ -174,3 +174,63 @@ let books = [
       ]
     }
   ]
+
+
+  function render() { // starts with body onload, render 
+                      // the books with the function "pictureRendering"
+    let pictureRef = document.getElementById('content');
+
+    for (let index = 0; index < books.length; index++) {
+        pictureRef.innerHTML += booksRendering(index);
+    }
+ 
+}
+
+function booksRendering(index) { // render books  //
+    return ` <div id="book" class="bookfield">
+              <header class="bookHeader"><h3>${books[index].name}</h3></header>
+                <div class="pictureField">
+                    <img src="./img/book-pink.png" alt="Illustration from small pichture">
+                </div>
+                <div class="bookDatas">
+                    <div class="priceField">
+                        <p>${books[index].price.toFixed(2) + " €"}</p>
+                    </div>
+                    <div class="likeField">
+                        <p>${books[index].likes}</p>
+                        <img src="./img/heart_white.svg" alt="Herz">
+                    </div>
+                </div>
+                <div class="dataField">
+                    <table>
+                        <tr>
+                            <td><b>Author</b></td>
+                            <td>:</td>
+                            <td>${books[index].author}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Erscheinungsjahr</b></td>
+                            <td>:</td>
+                            <td>${books[index].publishedYear}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Genre</b></td>
+                            <td>:</td>
+                            <td>${books[index].genre}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="commentsField">
+                    <div class="comments">
+                    <h4>Kommentare:</h4>
+                    <p>keine Kommentare, schreibe du das erste</p>
+                    </div>
+                    <div class="inputField">
+                    <input type="text" placeholder="Schreibe dein Kommentar ...">
+                    <img src="./img/send_white.svg" alt="send-icon">
+                    </div>
+                </div>
+            </div>`
+}
+
+console.log(books[5].name);

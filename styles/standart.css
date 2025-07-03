@@ -1,0 +1,59 @@
+:root {
+    /* Variable for max. Content width  */
+    --maxWidth: 1440px;
+
+    /* Variablen for colors */
+    --backgroundColorHeaderFooter: #082029;
+    --backgroundColorAOT: rgb(5, 23, 30);
+    --borderColorHeaderFooter: rgba(255, 0, 0, 0.477);
+}
+
+* { /* empfohlene Standarteinstellung */
+    box-sizing: border-box;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+}
+
+.contentWidth {
+    /*box-sizing: border-box;*/
+    max-width: var(--maxWidth);
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    height: 100px;
+    background-color: var(--backgroundColorHeaderFooter);
+    border-bottom: solid;
+    border-color: var(--borderColorHeaderFooter);
+    display: flex;
+    align-items: center;
+}
+
+.aot {
+    background-color: var(--backgroundColorAOT);
+    min-height: calc(100vh - 200px); /*200px=100px Header and 100px Footer */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.footer {
+    height: 100px;
+    background-color: var(--backgroundColorHeaderFooter);
+    border-top: solid;
+    border-color: var(--borderColorHeaderFooter);
+
+    display: flex;
+    align-items: center;
+}

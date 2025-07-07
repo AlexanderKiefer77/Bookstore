@@ -177,18 +177,16 @@ let books = [
 
 function init() {
   render();
-  //likesRendering();
 }
 
 function render() { // init starts with body onload, render 
   // the books with the function "pictureRendering"
-  let pictureRef = document.getElementById('content');
+  let booksRef = document.getElementById('content');
 
   for (let index = 0; index < books.length; index++) {
-    pictureRef.innerHTML += booksRendering(index);
+    booksRef.innerHTML += booksRendering(index);
     likesRendering(index);
   }
-
 }
 
 function booksRendering(index) { // render books  //
@@ -201,8 +199,7 @@ function booksRendering(index) { // render books  //
                     <div class="priceField">
                         <p>${books[index].price.toFixed(2) + " €"}</p>
                     </div>
-                    <div id="like_container_${index}" class="likeField">
-                  
+                    <div id="like_container_${index}" class="likeField">                  
                     </div>
                 </div>
                 <div class="dataField">
@@ -240,17 +237,33 @@ function booksRendering(index) { // render books  //
 function likesRendering(index) {
   let likeContainer = document.getElementById(`like_container_${index}`);
   //console.log(likeContainer);
-  likeContainer.innerHTML += `<p>${books[index].likes}</p>`; //id="likes${index}"
-  if (books[index].liked) {
-    likeContainer.innerHTML += `<img id="unliked${index} class="likeField img" src="./img/heart_pink.svg" alt="red heart for unliked">`
+  likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>`; //
+  if (books[index].liked) { // =true
+    likeContainer.innerHTML += `<img id="IMGliked${index}" class="likeField" src="./img/heart_pink.svg" alt="red heart for liked" onclick="likeRemove(${index})">`
   }
   else {
-    likeContainer.innerHTML += `<img id="liked${index} class="likeField img" src="./img/heart_white.svg" alt="white heart for unliked">`
+    likeContainer.innerHTML += `<img id="IMGunliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`
+    console.log(likeContainer);
   }
 }
 
+function likeAdd(index) {
+  let likeContainer = document.getElementById(`like_container_${index}`);
+  let likeNumberForAdd = document.getElementById(`likes${index}`).innerHTML;
+  likeNumberForAdd++;
+  likeContainer.innerHTML = '';
+  likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
+                              <img id="IMGliked${index}" class="likeField" src="./img/heart_pink.svg" alt="red heart for liked" onclick="likeRemove(${index})">`;
+  document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+}
 
-console.log(books[8].name);
+function likeRemove(index) {
+  let likeContainer = document.getElementById(`like_container_${index}`);
+  let likeNumberForAdd = document.getElementById(`likes${index}`).innerHTML;
+  likeNumberForAdd--;
+  likeContainer.innerHTML = '';
+  likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
+                              <img id="IMGliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`;
+  document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+}
 
-//<p>${books[index].likes}</p>
-//                      <img src="./img/heart_white.svg" alt="Herz"></img>

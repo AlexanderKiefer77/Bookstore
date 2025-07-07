@@ -29,6 +29,7 @@
 
 /* ########### Buchfeld ######### */
 .bookfield {
+    box-sizing: border-box;
     width: 320px;
     height: 500px;
     background-color: #0D3240;
@@ -80,7 +81,7 @@
 }
 
 .likeField img {
-    width: 16px;
+    width: 18px;
 }
 
 .dataField {
@@ -92,7 +93,7 @@
 
 .commentsField {
     background-color: brown;
-    height: 215px;
+    height: 226px;
     padding: 12px;
     display: flex;
     flex-direction: column;
@@ -115,6 +116,10 @@ h4 {
     align-items: center;
     justify-content: space-between;
     height: 20px;
+}
+
+.input {
+    width: 90%;
 }
 
 .inputField img {

@@ -94,13 +94,14 @@
     border-bottom: 1px solid white;
 }
 
+/* ########### Kommentarfeld ######### */
 .commentsField {
-    background-color: brown;
     height: 226px;
     padding: 12px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
 }
@@ -112,17 +113,36 @@ h4 {
 .comments {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 12px;
+    font-size: 12px;
+    overflow-y: scroll;
+}
+
+.individualComments{
+    display: flex;
+}
+
+.commentsName {
+    min-width: 40%;
+}
+
+.commentsComment {
+   max-width: 57%;
 }
 
 .inputField {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 20px;
+    height: 30px;
+    width: 100%;
 }
 
 .input {
-    width: 90%;
+    min-width: 80%;
 }
 
 .inputField img {

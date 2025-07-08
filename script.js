@@ -186,6 +186,7 @@ function render() { // init starts with body onload, render
   for (let index = 0; index < books.length; index++) {
     booksRef.innerHTML += booksRendering(index);
     likesRendering(index);
+    renderComments(index);
   }
 }
 
@@ -221,14 +222,13 @@ function booksRendering(index) { // render books  //
                         </tr>
                     </table>
                 </div>
-                <div class="commentsField">
-                    <div class="comments">
+                <div class="commentsField">                    
                     <h4>Kommentare:</h4>
-                    <p>keine Kommentare, schreibe du das erste</p>
+                    <div id="comments${index}" class="comments">
                     </div>
                     <div class="inputField">
-                    <input type="text" placeholder="Schreibe dein Kommentar ..." class="input">
-                    <img src="./img/send_white.svg" alt="send-icon">
+                      <input type="text" placeholder="Schreibe dein Kommentar ..." class="input">
+                      <img src="./img/send_white.svg" alt="send-icon">
                     </div>
                 </div>
             </div>`
@@ -236,15 +236,14 @@ function booksRendering(index) { // render books  //
 
 function likesRendering(index) {
   let likeContainer = document.getElementById(`like_container_${index}`);
-  //console.log(likeContainer);
-  likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>`; //
+  likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>`;
   if (books[index].liked) { // =true
     likeContainer.innerHTML += `<img id="IMGliked${index}" class="likeField" src="./img/heart_pink.svg" alt="red heart for liked" onclick="likeRemove(${index})">`
   }
   else {
     likeContainer.innerHTML += `<img id="IMGunliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`
-    console.log(likeContainer);
   }
+
 }
 
 function likeAdd(index) {
@@ -267,3 +266,23 @@ function likeRemove(index) {
   document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
 }
 
+function renderComments(index) {
+  let test = document.getElementById(`comments${index}`);
+
+  if (books[index].comments.length == 0) {
+    test.innerHTML += `keine Kommentare, schreibe du das erste`;
+  }
+  else {
+    for (let i = 0; i < books[index].comments.length; i++) {
+      test.innerHTML += commentsRendering(index, i);
+    }
+
+  }
+
+  function commentsRendering(index, i) {
+    return `<div class="individualComments">
+              <div id="commentsName" class="commentsName">[${books[index].comments[i].name}]  :</div>
+              <div id="commentsComment" class="commentsComment">${books[index].comments[i].comment}</div>
+            </div> `
+  }
+}

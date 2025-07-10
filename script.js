@@ -176,6 +176,7 @@ let books = [
 ]
 
 function init() {
+  getFromLocalStorage();
   render();
 }
 
@@ -227,8 +228,8 @@ function booksRendering(index) { // render books  //
                     <div id="comments${index}" class="comments">
                     </div>
                     <div class="inputField">
-                      <input type="text" placeholder="Schreibe dein Kommentar ..." class="input">
-                      <img src="./img/send_white.svg" alt="send-icon">
+                      <input type="text" placeholder="Schreibe dein Kommentar ..." id="inputCommentsField${index}" class="input">
+                      <img src="./img/send_white.svg" alt="send-icon" onclick="addComments(${index})">
                     </div>
                 </div>
             </div>`
@@ -243,7 +244,7 @@ function likesRendering(index) {
   else {
     likeContainer.innerHTML += `<img id="IMGunliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`
   }
-
+  saveToLocalStorage();
 }
 
 function likeAdd(index) {
@@ -254,6 +255,7 @@ function likeAdd(index) {
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
                               <img id="IMGliked${index}" class="likeField" src="./img/heart_pink.svg" alt="red heart for liked" onclick="likeRemove(${index})">`;
   document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+  saveToLocalStorage();
 }
 
 function likeRemove(index) {
@@ -264,25 +266,57 @@ function likeRemove(index) {
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
                               <img id="IMGliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`;
   document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+  saveToLocalStorage();
 }
 
 function renderComments(index) {
-  let test = document.getElementById(`comments${index}`);
+  let placeholderComment = document.getElementById(`comments${index}`);
 
   if (books[index].comments.length == 0) {
-    test.innerHTML += `keine Kommentare, schreibe du das erste`;
+    placeholderComment.innerHTML += `keine Kommentare, schreibe du das erste`;
   }
   else {
     for (let i = 0; i < books[index].comments.length; i++) {
-      test.innerHTML += commentsRendering(index, i);
+      placeholderComment.innerHTML += commentsRendering(index, i);
     }
-
   }
+}
 
-  function commentsRendering(index, i) {
-    return `<div class="individualComments">
-              <div id="commentsName" class="commentsName">[${books[index].comments[i].name}]  :</div>
-              <div id="commentsComment" class="commentsComment">${books[index].comments[i].comment}</div>
-            </div> `
+function commentsRendering(index, i) {
+  return `<div class="individualComments">
+            <div id="commentsName" class="commentsName">[${books[index].comments[i].name}]  :</div>
+            <div id="commentsComment" class="commentsComment">${books[index].comments[i].comment}</div>
+          </div>`
+}
+
+function addComments(index) {
+
+
+  let addCommentsInputRef = document.getElementById(`inputCommentsField${index}`);
+  let addCommentsInput = addCommentsInputRef.value;
+  addCommentsInputRef.value = ''; // leert input Feld
+  let placeholderComment2 = document.getElementById(`comments${index}`);
+  placeholderComment2.innerHTML = ''; // leert Kommentarfeld
+
+  books[index].comments.push({ "name": "Alexander", "comment": addCommentsInput });
+  renderComments(index);
+  saveToLocalStorage();
+}
+
+function saveToLocalStorage() {
+  localStorage.setItem("books", JSON.stringify(books));
+  // books = key - idealerweise (kein muss) name wie variable
+  // JSON.stringify wandelt das array zu einem String um
+}
+
+
+function getFromLocalStorage() {
+  let myArr = JSON.parse(localStorage.getItem("books"));
+  // JSON.parse wandelt den String wieder in ein array um
+
+  if (myArr == null) { // Abfrage ob es dieses array bereits gibt, falls ein neuer Benutzer 
+    return;
+  } else {
+    books = myArr;  // das geladene array wird in books geschrieben
   }
 }

@@ -176,7 +176,6 @@ let books = [
 ]
 
 function init() {
-  getFromLocalStorage();
   render();
 }
 
@@ -186,7 +185,9 @@ function render() { // init starts with body onload, render
 
   for (let index = 0; index < books.length; index++) {
     booksRef.innerHTML += booksRendering(index);
-    likesRendering(index);
+    //newArrayComments = books[index].comments;
+    //console.log(newArrayComments);
+    likesRendering(index);   
     renderComments(index);
   }
 }
@@ -247,9 +248,10 @@ function likesRendering(index) {
   saveToLocalStorage();
 }
 
-function likeAdd(index) {
+function likeAdd(index) { // like hinzufügen durch anklicken herz
   let likeContainer = document.getElementById(`like_container_${index}`);
   let likeNumberForAdd = document.getElementById(`likes${index}`).innerHTML;
+<<<<<<< HEAD
   likeNumberForAdd++; // likes Anzahl wird um 1 erhöht
   likeContainer.innerHTML = ''; // div wird geleert
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
@@ -258,11 +260,19 @@ function likeAdd(index) {
   books[index].likes = likeNumberForAdd; // neue Anzahl likes wird array hinzugefügt
   books[index].liked = true; // liked Wert im array wird auf true gesetzt
   saveToLocalStorage();
+=======
+  likeNumberForAdd++; // likes wird um 1 erhöht
+  likeContainer.innerHTML = ''; // div wird gelöscht
+  likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
+                              <img id="IMGliked${index}" class="likeField" src="./img/heart_pink.svg" alt="red heart for liked" onclick="likeRemove(${index})">`;
+  document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+>>>>>>> 6a281754c4c2cacab7286ec51967453df5bb364e
 }
 
-function likeRemove(index) {
+function likeRemove(index) { // like entfernen durch anklicken herz
   let likeContainer = document.getElementById(`like_container_${index}`);
   let likeNumberForAdd = document.getElementById(`likes${index}`).innerHTML;
+<<<<<<< HEAD
   likeNumberForAdd--; // likes Anzahl wird um 1 reduziert
   likeContainer.innerHTML = ''; // div wird geleert
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
@@ -271,6 +281,13 @@ function likeRemove(index) {
   books[index].likes = likeNumberForAdd; // neue Anzahl likes wird array hinzugefügt
   books[index].liked = false; // liked Wert im array wird auf false gesetzt
   saveToLocalStorage();
+=======
+  likeNumberForAdd--; // likes wird um 1 reduziert
+  likeContainer.innerHTML = ''; // div wird gelöscht
+  likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
+                              <img id="IMGliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`;
+  document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+>>>>>>> 6a281754c4c2cacab7286ec51967453df5bb364e
 }
 
 function renderComments(index) {
@@ -285,6 +302,7 @@ function renderComments(index) {
   }
 }
 
+<<<<<<< HEAD
 function commentsRendering(index, i) {
   return `<div class="individualComments">
             <div id="commentsName" class="commentsName">[${books[index].comments[i].name}]  :</div>
@@ -321,5 +339,12 @@ function getFromLocalStorage() {
     return;
   } else {
     books = myArr;  // das geladene array wird in books geschrieben
+=======
+  function commentsRendering(index, i) {
+    return `<div class="individualComments">
+              <div id="commentsName" class="commentsName">[${books[index].comments[i].name}]  :</div>
+              <div id="commentsComment" class="commentsComment">${books[index].comments[i].comment}</div>
+            </div> `
+>>>>>>> 6a281754c4c2cacab7286ec51967453df5bb364e
   }
 }

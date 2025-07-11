@@ -3,9 +3,21 @@
     --maxWidth: 1440px;
 
     /* Variablen for colors */
-    --backgroundColorHeaderFooter: #082029;
-    --backgroundColorAOT: rgb(5, 23, 30);
+    
+    /* ############### blauer Hintergrund ############################################# */
+    /*--backgroundColorHeaderFooter: #082029;
+    --backgroundColorAOT: rgb(5, 23, 30); 
+    --backgroundColorBookfield: #0D3240; 
+    --backgroundColorBookfieldPicturefield: #114758; */
+
+    /* ############### grüner Hintergrund ############################################# */
+    --backgroundColorHeaderFooter: #01190c;
+    --backgroundColorAOT: rgb(3, 35, 26);
+    --backgroundColorBookfield: rgb(10, 45, 26);
+    --backgroundColorBookfieldPicturefield:  #199e726b; 
+
     --borderColorHeaderFooter: rgba(255, 0, 0, 0.477);
+    
 }
 
 * { /* empfohlene Standarteinstellung */
@@ -50,7 +62,6 @@ header {
     background-color: var(--backgroundColorHeaderFooter);
     border-top: solid;
     border-color: var(--borderColorHeaderFooter);
-
     display: flex;
     align-items: center;
 }

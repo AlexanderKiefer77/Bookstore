@@ -32,7 +32,7 @@
     box-sizing: border-box;
     width: 320px;
     height: 500px;
-    background-color: #0D3240;
+    background-color: var(--backgroundColorBookfield);
     border: 2px solid white;
     border-radius: 16px;
     font-size: 16px;
@@ -50,7 +50,7 @@
 }
 
 .pictureField {
-    background-color: #114758;
+    background-color: var(--backgroundColorBookfieldPicturefield);
     height: 100px;
     border-bottom: 1px solid white;
     display: flex;

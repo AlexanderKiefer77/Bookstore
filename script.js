@@ -176,8 +176,7 @@ let books = [
 ]
 
 function init() {
-  getFromLocalStorage();
-  render();  
+  render();
 }
 
 function render() { // init starts with body onload, render 
@@ -257,9 +256,6 @@ function likeAdd(index) { // like hinzufügen durch anklicken herz
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
                               <img id="IMGliked${index}" class="likeField" src="./img/heart_pink.svg" alt="red heart for liked" onclick="likeRemove(${index})">`;
   document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
-  books[index].likes = likeNumberForAdd; // neue Anzahl likes wird array hinzugefügt
-  books[index].liked = true; // liked Wert im array wird auf true gesetzt
-  saveToLocalStorage();
 }
 
 function likeRemove(index) { // like entfernen durch anklicken herz
@@ -270,9 +266,6 @@ function likeRemove(index) { // like entfernen durch anklicken herz
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
                               <img id="IMGliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`;
   document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
-  books[index].likes = likeNumberForAdd; // neue Anzahl likes wird array hinzugefügt
-  books[index].liked = false; // liked Wert im array wird auf false gesetzt
-  saveToLocalStorage();
 }
 
 function renderComments(index) {
@@ -288,37 +281,10 @@ function renderComments(index) {
   }
 }
 
-function commentsRendering(index, i) {
-  return `<div class="individualComments">
-            <div id="commentsName" class="commentsName">[${books[index].comments[i].name}]  :</div>
-            <div id="commentsComment" class="commentsComment">${books[index].comments[i].comment}</div>
-          </div>`
-}
-
-function addComments(index) {
-  let addCommentsInputRef = document.getElementById(`inputCommentsField${index}`);
-  let addCommentsInput = addCommentsInputRef.value;
-  addCommentsInputRef.value = ''; // leert input Feld
-  let placeholderComment2 = document.getElementById(`comments${index}`);
-  placeholderComment2.innerHTML = ''; // leert Kommentarfeld
-  books[index].comments.unshift({"name": "Alexander", "comment": addCommentsInput});
-  renderComments(index);
-  saveToLocalStorage();
-}
-
-function saveToLocalStorage(){
-    localStorage.setItem("books", JSON.stringify(books)); 
-    // myData = key - idealerweise (kein muss) name wie variable
-    // JSON.stringify wandelt das array zu einem String um
-}
-
-function getFromLocalStorage() {
-    let myArr = JSON.parse(localStorage.getItem("books"));
-    // JSON.parse wandelt den String wieder in ein array um
-
-    if (myArr == null) { // Abfrage ob es dieses array bereits gibt, falls ein neuer Benutzer 
-        return;
-    } else {
-    books = myArr;  // das geladene array wird in books geschrieben
-    }
+  function commentsRendering(index, i) {
+    return `<div class="individualComments">
+              <div id="commentsName" class="commentsName">[${books[index].comments[i].name}]  :</div>
+              <div id="commentsComment" class="commentsComment">${books[index].comments[i].comment}</div>
+            </div> `
+  }
 }

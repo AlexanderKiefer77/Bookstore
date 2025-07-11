@@ -250,28 +250,31 @@ function likesRendering(index) {
 function likeAdd(index) {
   let likeContainer = document.getElementById(`like_container_${index}`);
   let likeNumberForAdd = document.getElementById(`likes${index}`).innerHTML;
-  likeNumberForAdd++;
-  likeContainer.innerHTML = '';
+  likeNumberForAdd++; // likes Anzahl wird um 1 erhöht
+  likeContainer.innerHTML = ''; // div wird geleert
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
                               <img id="IMGliked${index}" class="likeField" src="./img/heart_pink.svg" alt="red heart for liked" onclick="likeRemove(${index})">`;
   document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+  books[index].likes = likeNumberForAdd; // neue Anzahl likes wird array hinzugefügt
+  books[index].liked = true; // liked Wert im array wird auf true gesetzt
   saveToLocalStorage();
 }
 
 function likeRemove(index) {
   let likeContainer = document.getElementById(`like_container_${index}`);
   let likeNumberForAdd = document.getElementById(`likes${index}`).innerHTML;
-  likeNumberForAdd--;
-  likeContainer.innerHTML = '';
+  likeNumberForAdd--; // likes Anzahl wird um 1 reduziert
+  likeContainer.innerHTML = ''; // div wird geleert
   likeContainer.innerHTML += `<p id="likes${index}">${books[index].likes}</p>
                               <img id="IMGliked${index}" class="likeField" src="./img/heart_white.svg" alt="white heart for unliked" onclick="likeAdd(${index})">`;
   document.getElementById(`likes${index}`).innerHTML = likeNumberForAdd;
+  books[index].likes = likeNumberForAdd; // neue Anzahl likes wird array hinzugefügt
+  books[index].liked = false; // liked Wert im array wird auf false gesetzt
   saveToLocalStorage();
 }
 
 function renderComments(index) {
   let placeholderComment = document.getElementById(`comments${index}`);
-
   if (books[index].comments.length == 0) {
     placeholderComment.innerHTML += `keine Kommentare, schreibe du das erste`;
   }
@@ -290,17 +293,18 @@ function commentsRendering(index, i) {
 }
 
 function addComments(index) {
-
-
   let addCommentsInputRef = document.getElementById(`inputCommentsField${index}`);
   let addCommentsInput = addCommentsInputRef.value;
-  addCommentsInputRef.value = ''; // leert input Feld
-  let placeholderComment2 = document.getElementById(`comments${index}`);
-  placeholderComment2.innerHTML = ''; // leert Kommentarfeld
-
-  books[index].comments.push({ "name": "Alexander", "comment": addCommentsInput });
-  renderComments(index);
-  saveToLocalStorage();
+  if (addCommentsInput == "") { // Abfrage, ob ein Kommentar eingefügt wurde,
+    return; // wenn nein dann fertig
+  } else { // wenn ja, dann neuen Kommentar einfügen und speichern
+    addCommentsInputRef.value = ''; // leert input Feld
+    let placeholderComment2 = document.getElementById(`comments${index}`);
+    placeholderComment2.innerHTML = ''; // leert Kommentarfeld
+    books[index].comments.unshift({ "name": "Alexander", "comment": addCommentsInput }); // fügt neuen Kommentar als erstes ins Array ein
+    renderComments(index);
+    saveToLocalStorage();
+  }
 }
 
 function saveToLocalStorage() {
@@ -308,7 +312,6 @@ function saveToLocalStorage() {
   // books = key - idealerweise (kein muss) name wie variable
   // JSON.stringify wandelt das array zu einem String um
 }
-
 
 function getFromLocalStorage() {
   let myArr = JSON.parse(localStorage.getItem("books"));

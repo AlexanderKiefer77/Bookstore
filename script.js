@@ -176,7 +176,7 @@ let books = [
 ]
 
 function init() {
-  getFromLocalStorage();
+  getFromLocalStorage();  
   render();
 }
 
@@ -186,9 +186,7 @@ function render() { // init starts with body onload, render
 
   for (let index = 0; index < books.length; index++) {
     booksRef.innerHTML += booksRendering(index);
-    //newArrayComments = books[index].comments;
-    //console.log(newArrayComments);
-    likesRendering(index);   
+    likesRendering(index);
     renderComments(index);
   }
 }

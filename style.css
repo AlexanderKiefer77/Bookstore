@@ -20,6 +20,7 @@
 .footerRemark a {
     color: white;
     font-size: 24px;
+    padding-left: 16px;
 }
 
 .footerRemark a:hover {
@@ -148,4 +149,18 @@ h4 {
 .inputField img {
     height: 28px;
     cursor: pointer;
+}
+
+@media(max-width: 500px) {
+    .innerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    font-size: 10px;
+}
+
+.innerHeader img {
+    height: 32px;
+}
 }
